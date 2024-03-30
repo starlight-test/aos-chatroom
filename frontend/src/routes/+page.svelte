@@ -20,14 +20,14 @@
     let result = await results({
       process: "RUmNZFCeayzCxwzRT7Qiut9z1fQtfswsW0nTbEjcTWw",
       sort: "DESC",
-      limit: 50,
+      limit: 100,
     });
     console.log(result);
     result = result.edges.map((edge) => edge.node);
     let got_messages = [];
     result.forEach((item) => {
       if (item.Messages.length > 0) {
-        if (item.Messages[0].Data) {
+        if (item) {
           console.log(item.Messages[0]);
           let author = "Anonymous";
           for (let j = 0; j < item.Messages[0].Tags.length; j++) {
@@ -47,8 +47,6 @@
     });
     messages = got_messages;
   }
-
-  
 
   onMount(async () => {
     let localWallet = localStorage.getItem("wallet");
