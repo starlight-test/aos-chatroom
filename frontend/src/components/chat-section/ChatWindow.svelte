@@ -143,24 +143,16 @@
         for="username">Type your message...</label
       >
     </div>
+    
   </div>
 
   <div class="flex items-center justify-center">
     <input
-      type="file"
-      accept="image/png, image/jpeg"
-      bind:files
-      bind:this={fileInput}
-    />
-    <button
-      on:click={() => {
-        files = [];
-        fileInput.value = "";
-      }}
-    >
-      reset
-    </button>
-    <button on:click={generateWallet}>asdassdasd</button>
+        type="file"
+        accept="image/png, image/jpeg"
+        bind:files
+        bind:this={fileInput}
+      />
     <div
       class="flex rounded-xl bg-gradient-to-tr from-pink-300 to-blue-300 p-0.5 shadow-lg"
     >
@@ -171,3 +163,5 @@
     </div>
   </div>
 </div>
+
+
