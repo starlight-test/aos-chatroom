@@ -146,7 +146,7 @@
             message: o.msg,
             name: myUID,
             isDisplayable: true,
-            strDate: new Date().toISOString().substring(11, 16);,
+            strDate: new Date().toISOString().substring(11, 16),
         };
         msgs = [...msgs, m];
         sendMessage(m.message);
