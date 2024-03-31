@@ -5,6 +5,7 @@
     import Arweave from "arweave";
     import { createDataItemSigner, message } from "@permaweb/aoconnect";
     import type { JWKInterface } from "arweave/node/lib/wallet";
+
     const arweave = Arweave.init({});
 
     let imageToUpload: File | null = null;
@@ -19,12 +20,13 @@
     export let msgs: any[];
 
     let myMsg = "";
-    const sendMessage = async (messageData: string) => {
+    const sendMessage = async () => {
         const wallet = globalThis.arweaveWallet;
         if (!wallet) {
             alert("Please generate a wallet first");
             return;
         }
+        uploadImageToArweave();
         console.log(wallet);
         await wallet.connect([
             "ACCESS_ADDRESS",
@@ -36,12 +38,12 @@
             "ENCRYPT",
             "DECRYPT",
         ]);
-        console.log({
-            activeaddr: await wallet.getActiveAddress(),
-            alladdrs: await wallet.getAllAddresses(),
-        });
+        // console.log({
+        //     activeaddr: await wallet.getActiveAddress(),
+        //     alladdrs: await wallet.getAllAddresses(),
+        // });
         const msgsigner = createDataItemSigner(wallet);
-        console.log(msgsigner);
+        
         await message({
             process: "RUmNZFCeayzCxwzRT7Qiut9z1fQtfswsW0nTbEjcTWw",
             data: myMsg,
@@ -49,9 +51,10 @@
         });
     };
     const uploadImageToArweave = async () => {
-        console.log(files);
-        if (!imageToUpload) return;
-
+        if(fileInput){
+            imageToUpload = fileInput.files[0];
+            uploadImageToArweave();
+        }
         // Read the contents of the file asynchronously
         const fileReader = new FileReader();
         fileReader.onload = async function () {
